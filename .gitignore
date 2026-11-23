@@ -1,0 +1,17 @@
+# dotnet build output (dotnet build regenerates these)
+bin/
+obj/
+
+# Installer layout produced by the build (dist\BepInEx\plugins\TtsModernBrowser)
+dist/
+
+# WebView2 profile data created by the plugin or installer
+WebView2Data/
+
+# IDE and per-user files
+.vs/
+*.user
+*.suo
+
+# Agent session state
+.omo/
