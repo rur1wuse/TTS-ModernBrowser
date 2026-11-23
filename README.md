@@ -13,6 +13,8 @@ MB_setURL("a1b2c3", "https://www.google.com/") -- 换页（多人同步）
 MB_unmark("a1b2c3")                            -- 恢复原版 CEF 平板
 ```
 
+> 以上是写进脚本里的调用方式。若在游戏内控制台执行，要在语句最前面加 `lua` 前缀，例如 `lua MB_spawn("https://www.bilibili.com/")`——这里的 `lua` 是控制台命令，不属于函数名。
+
 ```
 安装：退出游戏 -> powershell -ExecutionPolicy Bypass -File install.ps1
 构建：dotnet build src\TtsModernBrowser\TtsModernBrowser.csproj -c Release
@@ -130,11 +132,19 @@ BepInEx 预加载器无法运行时，可以用 UnityDoorstop 直接启动插件
 ## 快速开始
 
 1. 打开存档，进入 `游戏 -> 脚本 -> 全局`，把 `lua\Global.lua` 全文粘贴进去。
-2. 生成一块平板：
+2. 生成一块平板。在 Global Script 里直接写函数调用，不需要任何前缀：
 
 ```lua
 MB_spawn("https://www.bilibili.com/")
 ```
+
+如果想在游戏内控制台执行（默认按 `~` 打开），要先输入 `lua` 告诉控制台「后面这段是 Lua 代码」，再紧跟同一条语句：
+
+```text
+lua MB_spawn("https://www.bilibili.com/")
+```
+
+`lua` 是控制台的执行命令，不是函数名的一部分；在控制台里输入的 `lua MB_spawn(...)`，和在脚本里写的 `MB_spawn(...)` 是同一件事。其余 `MB_*` 指令同理。
 
 或者接管场上已有的平板（先选中它，用它的 GUID）：
 
@@ -150,7 +160,7 @@ MB_mark("a1b2c3", "https://www.google.com/")
 
 ## Lua 指令
 
-所有函数都定义在 Global Script 里，Object Script 也可以直接调用。
+所有函数都定义在 Global Script 里，Object Script 也可以直接调用。在游戏控制台测试时，整条语句前加 `lua` 前缀（见上一节的两种执行入口）。
 
 | 指令 | 返回值 | 说明 |
 | --- | --- | --- |
