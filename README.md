@@ -16,7 +16,7 @@ MB_unmark("a1b2c3")                            -- 恢复原版 CEF 平板
 > 以上是写进脚本里的调用方式。若在游戏内控制台执行，要在语句最前面加 `lua` 前缀，例如 `lua MB_spawn("https://www.bilibili.com/")`——这里的 `lua` 是控制台命令，不属于函数名。
 
 ```
-安装：退出游戏 -> powershell -ExecutionPolicy Bypass -File install.ps1
+安装：退出游戏 -> 把 Release 里的 zip 解压到游戏根目录（源码安装见下文 install.ps1）
 构建：dotnet build src\TtsModernBrowser\TtsModernBrowser.csproj -c Release
 配置：<游戏>\BepInEx\config\com.tts.modernbrowser.cfg
 日志：<游戏>\BepInEx\LogOutput.log（插件行以 [MB] 开头）
@@ -86,6 +86,17 @@ Lua 端不调用任何插件接口，只写平板自身的状态：
 ---
 
 ## 安装
+
+### 从 Release 安装（推荐）
+
+1. 退出游戏。
+2. 从本仓库的 Releases 下载 `TtsModernBrowser-<版本>-win64.zip`。
+3. 把压缩包解压到游戏根目录——即包含 `Tabletop Simulator.exe` 的那一层；提示同名文件时选择覆盖。
+4. 启动游戏，`<游戏>\BepInEx\LogOutput.log` 中出现 `[MB] TTS Modern Browser ready` 即安装成功。
+
+压缩包顶层已经是 `BepInEx\plugins\TtsModernBrowser\`，解压后不需要再移动文件，也不需要运行 `install.ps1`。包里**只有插件本体，不含 BepInEx 和 WebView2 Runtime**，这两项要先按“环境要求”装好。
+
+配置（`BepInEx\config\com.tts.modernbrowser.cfg`）和 `WebView2Data` 都不在压缩包内，覆盖安装或升级不会清掉已有配置。升级时同样先退出游戏，再用新 zip 覆盖解压。
 
 ### 从源码构建并安装
 
